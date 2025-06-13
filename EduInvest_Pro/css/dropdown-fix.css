@@ -1,0 +1,37 @@
+/* تصحيحات للقوائم المنسدلة وإلغاء أي تعارضات سابقة */
+
+/* إعادة تعريف موقع القوائم المنسدلة */
+.dropdown-menu {
+    left: auto !important; /* إلغاء أي تنسيق سابق للموقع */
+    right: auto !important;
+    transform: none !important;
+    margin-top: 5px !important;
+    position: absolute !important;
+    top: 100% !important;
+    display: none;
+}
+
+.dropdown-menu.active {
+    display: block !important;
+}
+
+/* تنسيق للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .dropdown-menu.active {
+        position: fixed !important;
+        top: auto !important;
+        width: 90% !important;
+        left: 5% !important;
+        right: auto !important;
+    }
+}
+
+/* ضمان أن الأزرار النشطة تظهر بشكل صحيح */
+.nav-button.active {
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* إعطاء الأولوية لهذه القواعد */
+.dropdown {
+    position: relative !important;
+}

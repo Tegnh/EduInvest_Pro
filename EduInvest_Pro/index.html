@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduInvest Pro</title>    
+    <!-- تحسين تحميل CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/nav-icons.css">
+    <link rel="stylesheet" href="css/enhanced-nav.css">
+    <link rel="stylesheet" href="css/centered-nav.css">
+    <link rel="stylesheet" href="css/improved-dropdowns.css">
+    <link rel="stylesheet" href="css/dropdown-fix.css">
+    <link rel="stylesheet" href="css/improved-main.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/light-theme.css" id="theme-style">
+    <!-- تحسين تحميل الخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="description" content="منصة EduInvest Pro - منصتك المتكاملة لتعلم المالية وإدارة الميزانية والاستثمار">
+</head>
+<body class="light-theme">    
+    <header>        
+        <div class="logo">
+            <h1>EduInvest Pro</h1>
+        </div>
+        <nav class="centered-nav">
+            <ul class="nav-icons">
+                <li>
+                    <button id="theme-toggle" aria-label="تبديل الوضع المظلم" class="nav-button">
+                        <img src="assets/icons/dark-mode.svg" alt="الوضع المظلم" id="theme-icon">
+                        <span class="icon-text">الوضع الليلي</span>
+                    </button>
+                </li>                <li class="dropdown">
+                    <button aria-label="الحاسبة" class="nav-button" id="calculator-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="8" y1="10" x2="10" y2="10"></line>
+                            <line x1="12" y1="10" x2="14" y2="10"></line>
+                            <line x1="16" y1="10" x2="16" y2="10"></line>
+                            <line x1="8" y1="14" x2="10" y2="14"></line>
+                            <line x1="12" y1="14" x2="14" y2="14"></line>
+                            <line x1="16" y1="14" x2="16" y2="14"></line>
+                            <line x1="8" y1="18" x2="10" y2="18"></line>
+                            <line x1="12" y1="18" x2="14" y2="18"></line>
+                            <line x1="16" y1="18" x2="16" y2="18"></line>
+                        </svg>
+                        <span class="icon-text">الحاسبة</span>
+                    </button>
+                    <div class="dropdown-menu" id="calculator-dropdown">
+                        <a href="pages/calculator/budget.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3v18h18"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg>
+                            <span>حاسبة الميزانية</span>
+                        </a>
+                        <a href="pages/calculator/History.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 8v4l3 3"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                            </svg>
+                            <span>سجل الميزانية</span>
+                        </a>
+                        <a href="pages/calculator/investment.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20"></path>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            <span>حاسبة الاستثمار</span>
+                        </a>
+                    </div>
+                </li><li class="dropdown">
+                    <button aria-label="الأسواق" class="nav-button" id="markets-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20V10"></path>
+                            <path d="M18 20V4"></path>
+                            <path d="M6 20V16"></path>
+                        </svg>
+                        <span class="icon-text">الأسواق</span>
+                    </button>
+                    <div class="dropdown-menu" id="markets-dropdown">
+                        <a href="pages/markets/SA.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12h20"></path>
+                                <path d="M10 7H2v10h8V7z"></path>
+                                <path d="M22 7h-8v10h8V7z"></path>
+                            </svg>
+                            <span>السوق السعودي</span>
+                        </a>
+                        <a href="pages/markets/US.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12h20"></path>
+                                <path d="M10 7H2v10h8V7z"></path>
+                                <path d="M22 7h-8v10h8V7z"></path>
+                            </svg>
+                            <span>السوق الأمريكي</span>
+                        </a>
+                        <a href="pages/markets/models.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                <polyline points="3.29 7 12 12 20.71 7"></polyline>
+                            </svg>
+                            <span>نماذج اقتصادية عالمية</span>
+                        </a>
+                        <a href="pages/markets/EvaluationOfCompanies.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                <path d="M9 12h6"></path>
+                                <path d="M9 16h6"></path>
+                            </svg>
+                            <span>تقييم الشركات</span>
+                        </a>
+                    </div>
+                </li>                <li class="dropdown">
+                    <button aria-label="المالية" class="nav-button" id="finance-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                            <path d="M12 6v2"></path>
+                            <path d="M12 16v2"></path>
+                        </svg>
+                        <span class="icon-text">المالية</span>
+                    </button>                    <div class="dropdown-menu" id="finance-dropdown">
+                        <a href="pages/finance/basics.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"></path>
+                                <path d="M15 7h6v6"></path>
+                            </svg>
+                            <span>أساسيات الاقتصاد</span>
+                        </a>
+                        <a href="pages/finance/invesment.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                            <span>الاستثمار</span>
+                        </a>
+                        <a href="pages/finance/MIS.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            <span>نظم المعلومات</span>
+                        </a>
+                        <a href="pages/finance/Accounting.html" class="dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                                <line x1="4" y1="22" x2="4" y2="15"></line>
+                            </svg>
+                            <span>المحاسبة</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="الأنظمة" class="nav-button" id="systems-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                        <span class="icon-text">الأنظمة</span>
+                    </button>
+                    <div class="dropdown-menu" id="systems-dropdown">
+                        <a href="pages/system/econemySYS.html" class="dropdown-item main-system-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"></path>
+                                <path d="M15 7h6v6"></path>
+                            </svg>
+                            <span>الأنظمة الاقتصادية</span>
+                        </a>
+                        <a href="pages/system/governomentSYS.html" class="dropdown-item main-system-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
+                            </svg>
+                            <span>الأنظمة الحكومية</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>    
+    
+    <main>
+        <section class="hero">
+            <h2>مرحباً بك في منصة EduInvest Pro</h2>
+            <p>منصتك المتكاملة لتعلم المالية وإدارة الميزانية والاستثمار في الأسواق المالية</p>
+            <div class="hero-actions">
+                <a href="#financial-section" class="btn-primary">استكشف الأقسام</a>
+                <a href="pages/calculator/budget.html" class="btn-secondary">ابدأ بالميزانية</a>
+            </div>
+        </section>
+        
+        <!-- قسم القوائم المالية -->
+        <section id="financial-section" class="financial-menus">
+            <h2 class="section-title">القوائم المالية الرئيسية</h2>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="icon-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                            <path d="M12 6v2"></path>
+                            <path d="M12 16v2"></path>
+                        </svg>
+                    </div>
+                    <h3>المحاسبة</h3>
+                    <p>مبادئ المحاسبة الأساسية، القوائم المالية، وتحليل البيانات المحاسبية</p>
+                    <a href="pages/finance/Accounting.html" class="btn-primary">استكشف المحاسبة</a>
+                </div>
+                <div class="menu-card">
+                    <div class="icon-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>الاستثمار</h3>
+                    <p>استراتيجيات الاستثمار، تحليل الفرص، وإدارة المحافظ الاستثمارية</p>
+                    <a href="pages/finance/invesment.html" class="btn-primary">استكشف الاستثمار</a>
+                </div>
+                <div class="menu-card">
+                    <div class="icon-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3>الأنظمة</h3>
+                    <p>الأنظمة الاقتصادية والحكومية المختلفة وتأثيرها على القطاع المالي</p>
+                    <div class="menu-links">
+                        <a href="pages/system/econemySYS.html">الأنظمة الاقتصادية</a> | 
+                        <a href="pages/system/governomentSYS.html">الأنظمة الحكومية</a>
+                    </div>
+                </div>            </div>
+        </section>
+        
+        <!-- قسم المميزات -->
+        <section class="features-section">
+            <h2 class="section-title">مميزات المنصة</h2>
+            <div class="features-container">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3>تجربة تعلم مميزة</h3>
+                    <p>تعلم المفاهيم المالية والاستثمارية بأسلوب مبسط وواضح من خلال محتوى تفاعلي وأدوات عملية</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3>أدوات مالية احترافية</h3>
+                    <p>حاسبات مالية متنوعة لإدارة ميزانيتك وتتبع استثماراتك وتخطيط أهدافك المالية بكفاءة</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 19V5"></path>
+                            <path d="M5 12l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                    <h3>بيانات الأسواق المالية</h3>
+                    <p>تحليلات مفصلة للأسواق المحلية والعالمية مع رؤى عميقة حول الاتجاهات الاقتصادية والاستثمارية</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3>فهم الأنظمة الاقتصادية</h3>
+                    <p>تعمق في فهم الأنظمة الاقتصادية والحكومية وتأثيرها على قراراتك المالية والاستثمارية</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- قسم الإحصائيات -->
+        <section class="stats-section">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value">6+</div>
+                    <div class="stat-label">أداة مالية</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">10+</div>
+                    <div class="stat-label">درس تعليمي</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">2</div>
+                    <div class="stat-label">سوق مالي</div>
+                </div>
+              
+            </div>
+        </section>
+        
+        <!-- أقسام المحتوى تأتي هنا -->
+    </main><footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>عن المنصة</h3>
+                <p>منصة EduInvest Pro هي منصة تعليمية متخصصة في مجال المال والاستثمار، تهدف إلى تقديم المعرفة المالية بأسلوب مبسط وعملي.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul class="quick-links">
+                    <li><a href="pages/finance/basics.html">أساسيات الاقتصاد</a></li>
+                    <li><a href="pages/finance/invesment.html">الاستثمار</a></li>
+                    <li><a href="pages/calculator/budget.html">حاسبة الميزانية</a></li>
+                    <li><a href="pages/markets/SA.html">الأسواق المالية</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section social-links">
+                <h3>تواصل معي</h3>
+                <ul>
+                    <li>
+                        <a href="https://twitter.com/6ar_t" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="4" y1="4" x2="20" y2="20"></line>
+                                <line x1="20" y1="4" x2="4" y2="20"></line>
+                            </svg>
+                            Twitter
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/tarig-fdl-7a6599348/" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Tegnh" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة &copy; EduInvest Pro 2025</p>
+        </div>
+    </footer>
+    
+    <!-- تحسين تحميل JavaScript -->
+    <script src="js/improved-dropdowns.js"></script>
+    <script src="js/theme-switcher.js"></script>
+    <script src="js/improved-index.js"></script>
+    <script src="index.js"></script>
+    <script>
+        // تهيئة القوائم المنسدلة بعد تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof setupDropdowns === 'function') {
+                setupDropdowns();
+            }
+        });
+    </script>
+</body>
+</html>

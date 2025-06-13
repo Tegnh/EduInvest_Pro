@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أساسيات الاقتصاد - EduInvest Pro</title>
+    <link rel="stylesheet" href="../../../index.css">
+    <link rel="stylesheet" href="../../../css/light-theme.css" id="theme-style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .economics-section {
+            margin-bottom: 3rem;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .economics-section:hover {
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+        }
+        
+        .economics-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.8rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .economics-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .economics-card {
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border-top: 4px solid transparent;
+            height: 100%;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .economics-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .economics-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(var(--primary-rgb), 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .economics-card:hover::before {
+            opacity: 1;
+        }
+        
+        .economics-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed rgba(var(--primary-rgb), 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(var(--primary-rgb), 0.1);
+            border-radius: 8px;
+            padding: 6px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .economics-card:hover .card-icon {
+            transform: scale(1.15);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .card-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .economics-card:hover .card-icon svg {
+            stroke: white;
+        }
+        
+        .card-expanded-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background-color: rgba(var(--primary-rgb), 0.03);
+            margin-top: 1rem;
+            border-radius: 8px;
+            opacity: 0;
+        }
+        
+        .economics-card.expanded .card-expanded-content {
+            max-height: 500px;
+            padding: 1rem;
+            opacity: 1;
+            margin-top: 1.5rem;
+            border-right: 3px solid var(--primary-color);
+        }
+        
+        .card-expanded-content h5 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .card-action {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .card-action button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .card-action button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .card-action button svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        .economics-card.expanded .card-action button svg {
+            transform: rotate(180deg);
+        }
+        
+        .tabs-container {
+            margin-bottom: 3rem;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            margin: 0 1rem;
+            color: var(--secondary-text);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .tab:hover::after {
+            width: 100%;
+            right: auto;
+            left: 0;
+        }
+        
+        .tab.active {
+            color: var(--primary-color);
+        }
+        
+        .tab.active::after {
+            width: 100%;
+            background-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .definition-box {
+            background-color: rgba(var(--primary-rgb), 0.05);
+            border-right: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .definition-box:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 1rem;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg, rgba(var(--primary-rgb), 0.05) 25%, transparent 25%, transparent 50%, rgba(var(--primary-rgb), 0.05) 50%, rgba(var(--primary-rgb), 0.05) 75%, transparent 75%);
+            background-size: 20px 20px;
+            opacity: 0.4;
+            z-index: 0;
+        }
+        
+        .page-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--secondary-text);
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .economics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                padding: 0.8rem 1rem;
+                border-bottom: none;
+                border-right: 3px solid transparent;
+                margin: 0.3rem 0;
+                text-align: right;
+            }
+            
+            .tab::after {
+                height: 100%;
+                width: 3px;
+                right: 0;
+                top: 0;
+                bottom: auto;
+            }
+            
+            .tab.active::after {
+                height: 100%;
+                width: 3px;
+            }
+            
+            .economics-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html">
+                <h1>EduInvest Pro</h1>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-icons">                <li>
+                    <button id="theme-toggle" aria-label="تبديل الوضع المظلم" class="nav-button">
+                        <img src="../../../assets/icons/dark-mode.svg" alt="الوضع المظلم" id="theme-icon">
+                        <span class="icon-text">الوضع المظلم</span>
+                    </button>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="الحاسبة" class="nav-button" id="calculator-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="8" y1="10" x2="10" y2="10"></line>
+                            <line x1="12" y1="10" x2="14" y2="10"></line>
+                            <line x1="16" y1="10" x2="16" y2="10"></line>
+                            <line x1="8" y1="14" x2="10" y2="14"></line>
+                            <line x1="12" y1="14" x2="14" y2="14"></line>
+                            <line x1="16" y1="14" x2="16" y2="14"></line>
+                            <line x1="8" y1="18" x2="10" y2="18"></line>
+                            <line x1="12" y1="18" x2="14" y2="18"></line>
+                            <line x1="16" y1="18" x2="16" y2="18"></line>
+                        </svg>
+                        <span class="icon-text">الحاسبة</span>
+                    </button>
+                    <div class="dropdown-menu" id="calculator-dropdown">
+                        <a href="../../calculator/budget.html" class="dropdown-item">حاسبة الميزانية</a>
+                        <a href="../../calculator/History.html" class="dropdown-item">سجل الميزانية</a>
+                        <a href="../../calculator/investment.html" class="dropdown-item">حاسبة الاستثمار</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="الأسواق" class="nav-button" id="markets-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20V10"></path>
+                            <path d="M18 20V4"></path>
+                            <path d="M6 20V16"></path>
+                        </svg>
+                        <span class="icon-text">الأسواق</span>
+                    </button>
+                    <div class="dropdown-menu" id="markets-dropdown">
+                        <a href="../../markets/SA.html" class="dropdown-item">السوق السعودي</a>
+                        <a href="../../markets/US.html" class="dropdown-item">السوق الأمريكي</a>
+                        <a href="../../markets/models.html" class="dropdown-item">نماذج اقتصادية عالمية</a>
+                        <a href="../../markets/EvaluationOfCompanies.html" class="dropdown-item">تقييم الشركات</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="المالية" class="nav-button" id="finance-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                            <path d="M12 6v2"></path>
+                            <path d="M12 16v2"></path>
+                        </svg>
+                        <span class="icon-text">المالية</span>
+                    </button>
+                    <div class="dropdown-menu" id="finance-dropdown">
+                        <a href="../Accounting.html" class="dropdown-item">المحاسبة</a>
+                        <a href="../invesment.html" class="dropdown-item">الاستثمار</a>
+                        <a href="../MIS.html" class="dropdown-item">نظم المعلومات</a>
+                        <div class="dropdown-submenu">
+                            <a href="#" class="dropdown-item has-submenu">الاقتصاد</a>
+                            <div class="dropdown-submenu-content active">
+                                <a href="./basics.html" class="dropdown-item">أساسيات الاقتصاد</a>
+                                <a href="./systems.html" class="dropdown-item">الأنظمة الاقتصادية</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>أساسيات الاقتصاد</h2>
+            <p>مقدمة شاملة للمفاهيم الاقتصادية الأساسية لتعزيز فهم آليات السوق والاقتصاد الكلي والجزئي</p>
+        </section>
+        
+        <section class="tabs-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="micro">الاقتصاد الجزئي</div>
+                <div class="tab" data-tab="macro">الاقتصاد الكلي</div>
+            </div>
+            
+            <!-- الاقتصاد الجزئي -->
+            <div class="tab-content active" id="micro">
+                <section class="economics-section">
+                    <h3>مفهوم الاقتصاد الجزئي</h3>
+                    <div class="definition-box">
+                        <p><strong>الاقتصاد الجزئي</strong> هو فرع من فروع علم الاقتصاد يدرس سلوك الأفراد والشركات وكيفية اتخاذهم للقرارات المتعلقة بتخصيص الموارد المحدودة. يركز هذا العلم على دراسة العرض والطلب والأسعار في الأسواق الفردية.</p>
+                    </div>
+                    <p>يتناول الاقتصاد الجزئي تحليل الوحدات الاقتصادية الفردية مثل المستهلكين والشركات والأسواق المحددة، ويهتم بدراسة كيفية تأثر هذه الوحدات بالحوافز الاقتصادية المختلفة وكيف تتخذ قرارات التخصيص الأمثل للموارد النادرة.</p>
+                    
+                    <div class="economics-grid">
+                        <div class="economics-card">
+                            <h4>
+                                <div class="card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                    </svg>
+                                </div>
+                                العرض والطلب
+                            </h4>
+                            <p>نظرية العرض والطلب هي حجر الأساس في الاقتصاد الجزئي وتشرح كيفية تحديد الأسعار في الأسواق الحرة.</p>
+                            <ul>
+                                <li>قانون العرض: كلما ارتفع السعر، زاد العرض</li>
+                                <li>قانون الطلب: كلما ارتفع السعر، قل الطلب</li>
+                                <li>نقطة التوازن: حيث يتقاطع منحنى العرض مع منحنى الطلب</li>
+                            </ul>
+                            <div class="card-expanded-content">
+                                <h5>تفاصيل مهمة حول العرض والطلب</h5>
+                                <p>تشكل نظرية العرض والطلب أساساً لفهم كيفية تحديد الأسعار وتوزيع الموارد في الاقتصاد الحر. تتأثر كمية العرض والطلب بعوامل متعددة مثل:</p>
+                                <ul>
+                                    <li><strong>محددات الطلب:</strong> سعر السلعة، دخل المستهلكين، توقعات الأسعار المستقبلية، أذواق المستهلكين، أسعار السلع البديلة والمكملة.</li>
+                                    <li><strong>محددات العرض:</strong> سعر السلعة، تكلفة عوامل الإنتاج، التكنولوجيا المستخدمة، توقعات المنتجين، عدد المنتجين في السوق.</li>
+                                </ul>
+                            </div>
+                            <div class="card-action">
+                                <button class="expand-btn">
+                                    عرض المزيد
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="economics-card">
+                            <h4>
+                                <div class="card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                                    </svg>
+                                </div>
+                                مرونة الأسعار
+                            </h4>
+                            <p>تقيس مرونة الأسعار مدى استجابة المستهلكين والمنتجين للتغيرات في الأسعار.</p>
+                            <ul>
+                                <li>مرونة الطلب: استجابة الكمية المطلوبة للتغير في السعر</li>
+                                <li>مرونة العرض: استجابة الكمية المعروضة للتغير في السعر</li>
+                                <li>السلع المرنة والغير مرنة وتأثيرها على الإيرادات</li>
+                            </ul>
+                            <div class="card-expanded-content">
+                                <h5>أنواع مرونة الطلب السعرية</h5>
+                                <ul>
+                                    <li><strong>مرن:</strong> عندما تكون نسبة التغير في الكمية أكبر من نسبة التغير في السعر (أكبر من 1). مثال: السلع الكمالية.</li>
+                                    <li><strong>غير مرن:</strong> عندما تكون نسبة التغير في الكمية أقل من نسبة التغير في السعر (أقل من 1). مثال: الضروريات كالأدوية.</li>
+                                    <li><strong>أحادي المرونة:</strong> عندما تتساوى نسبة التغير في الكمية مع نسبة التغير في السعر (تساوي 1).</li>
+                                    <li><strong>عديم المرونة:</strong> لا يتغير الطلب مهما تغير السعر (تساوي صفر). مثال: الأنسولين لمرضى السكري.</li>
+                                    <li><strong>لانهائي المرونة:</strong> تتغير الكمية المطلوبة بشكل لانهائي مع أي تغير في السعر. مثال: سلع المنافسة الكاملة.</li>
+                                </ul>
+                            </div>
+                            <div class="card-action">
+                                <button class="expand-btn">
+                                    عرض المزيد
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="economics-card">
+                            <h4>
+                                <div class="card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                سلوك المستهلك
+                            </h4>
+                            <p>يدرس كيفية اتخاذ المستهلكين للقرارات بناءً على تفضيلاتهم والقيود المفروضة عليهم.</p>
+                            <ul>
+                                <li>نظرية المنفعة: تعظيم الرضا من خلال الاستهلاك</li>
+                                <li>منحنيات السواء وخط الميزانية</li>
+                                <li>الاختيار الأمثل للمستهلك</li>
+                            </ul>
+                            <div class="card-expanded-content">
+                                <h5>نظريات سلوك المستهلك</h5>
+                                <p>هناك عدة نظريات تفسر سلوك المستهلك وكيفية اتخاذه للقرارات الاستهلاكية:</p>
+                                <ul>
+                                    <li><strong>نظرية المنفعة العددية (الكلاسيكية):</strong> تفترض أن المستهلك قادر على قياس المنفعة التي يحصل عليها من السلع بشكل عددي.</li>
+                                    <li><strong>نظرية المنفعة الترتيبية (الحديثة):</strong> تفترض أن المستهلك قادر فقط على ترتيب تفضيلاته دون قياس دقيق للمنفعة.</li>
+                                    <li><strong>نظرية الكشف عن التفضيلات:</strong> تستنتج تفضيلات المستهلك من سلوكه الفعلي في السوق.</li>
+                                    <li><strong>نظرية الاقتصاد السلوكي:</strong> تدرس العوامل النفسية والاجتماعية المؤثرة على قرارات المستهلكين.</li>
+                                </ul>
+                            </div>
+                            <div class="card-action">
+                                <button class="expand-btn">
+                                    عرض المزيد
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="economics-card">
+                            <h4>
+                                <div class="card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                        <path d="M2 17l10 5 10-5"></path>
+                                        <path d="M2 12l10 5 10-5"></path>
+                                    </svg>
+                                </div>
+                                سلوك المنتج والشركات
+                            </h4>
+                            <p>يحلل كيفية اتخاذ الشركات لقرارات الإنتاج والتسعير لتعظيم الأرباح.</p>
+                            <ul>
+                                <li>نظرية الإنتاج والتكاليف</li>
+                                <li>هياكل السوق المختلفة (المنافسة الكاملة، الاحتكار، المنافسة الاحتكارية)</li>
+                                <li>استراتيجيات التسعير والإنتاج</li>
+                            </ul>
+                            <div class="card-expanded-content">
+                                <h5>هياكل السوق الرئيسية</h5>
+                                <ul>
+                                    <li><strong>المنافسة الكاملة:</strong> عدد كبير من البائعين والمشترين، سلع متجانسة، حرية دخول وخروج، معلومات كاملة. مثال: سوق الخضروات.</li>
+                                    <li><strong>المنافسة الاحتكارية:</strong> عدد كبير من البائعين، سلع متمايزة، حرية دخول وخروج. مثال: المطاعم.</li>
+                                    <li><strong>احتكار القلة:</strong> عدد قليل من البائعين، سلع متمايزة أو متجانسة، صعوبة الدخول. مثال: سوق السيارات.</li>
+                                    <li><strong>الاحتكار:</strong> بائع واحد، لا بدائل قريبة، حواجز دخول قوية. مثال: شركات الكهرباء في بعض المناطق.</li>
+                                </ul>
+                            </div>
+                            <div class="card-action">
+                                <button class="expand-btn">
+                                    عرض المزيد
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="economics-section">
+                    <h3>أهمية دراسة الاقتصاد الجزئي</h3>
+                    <p>يساعدنا الاقتصاد الجزئي على فهم كيفية عمل الأسواق وكيف تؤثر السياسات الحكومية على سلوك المستهلكين والشركات. هذه بعض الفوائد الرئيسية لدراسة الاقتصاد الجزئي:</p>
+                    
+                    <ul>
+                        <li><strong>تحسين القرارات الاستهلاكية:</strong> فهم كيفية تأثير الأسعار والدخل على الخيارات الاستهلاكية والادخارية.</li>
+                        <li><strong>اتخاذ قرارات أعمال أفضل:</strong> مساعدة رواد الأعمال على فهم التكاليف والإيرادات والمنافسة في السوق.</li>
+                        <li><strong>تقييم السياسات الحكومية:</strong> فهم تأثير الضرائب والإعانات وغيرها من التدخلات في السوق.</li>
+                        <li><strong>فهم فشل السوق:</strong> معرفة متى لا تؤدي الأسواق إلى النتائج المثلى وكيف يمكن معالجة ذلك.</li>
+                    </ul>
+                </section>
+            </div>
+            
+            <!-- الاقتصاد الكلي -->
+            <div class="tab-content" id="macro">
+                <section class="economics-section">
+                    <h3>مفهوم الاقتصاد الكلي</h3>
+                    <div class="definition-box">
+                        <p><strong>الاقتصاد الكلي</strong> هو فرع من فروع علم الاقتصاد يدرس سلوك الاقتصاد ككل، ويركز على المؤشرات الاقتصادية الواسعة مثل الناتج المحلي الإجمالي، ومعدلات البطالة، ومعدلات التضخم، وتوازن المدفوعات.</p>
+                    </div>
+                    <p>يهتم الاقتصاد الكلي بدراسة كيفية عمل الاقتصاد بشكل كلي، ويحلل الظواهر الاقتصادية الشاملة التي تؤثر على الدول والمناطق وحتى الاقتصاد العالمي. يساعدنا في فهم الدورات الاقتصادية، وتأثير السياسات المالية والنقدية، وعوامل النمو الاقتصادي على المدى الطويل.</p>
+                    
+                    <div class="economics-grid">
+                        <div class="economics-card">
+                            <h4>
+                                <div class="card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="20" x2="12" y2="10"></line>
+                                        <line x1="18" y1="20" x2="18" y2="4"></line>
+                                        <line x1="6" y1="20" x2="6" y2="16"></line>
+                                    </svg>
+                                </div>
+                                مؤشرات الاقتصاد الكلي الرئيسية
+                            </h4>
+                            <p>المقاييس المستخدمة لتقييم صحة الاقتصاد وأدائه بشكل عام.</p>
+                            <ul>
+                                <li>الناتج المحلي الإجمالي (GDP): إجمالي قيمة السلع والخدمات المنتجة</li>
+                                <li>معدل البطالة: نسبة السكان العاملين الذين لا يجدون عملاً</li>
+                                <li>معدل التضخم: معدل الزيادة في مستوى الأسعار العام</li>
+                                <li>الميزان التجاري: الفرق بين الصادرات والواردات</li>
+                            </ul>
+                            <div class="card-expanded-content">
+                                <h5>الناتج المحلي الإجمالي</h5>
+                                <p>يقاس الناتج المحلي الإجمالي بثلاث طرق مختلفة:</p>
+                                <ul>
+                                    <li><strong>طريقة الإنفاق:</strong> GDP = الاستهلاك الخاص + الاستثمار + الإنفاق الحكومي + (الصادرات - الواردات)</li>
+                                    <li><strong>طريقة الدخل:</strong> مجموع دخول عوامل الإنتاج (أجور + إيجارات + فوائد + أرباح)</li>
+                                    <li><strong>طريقة القيمة المضافة:</strong> مجموع القيمة المضافة لكل قطاعات الاقتصاد</li>
+                                </ul>
+                                <h5>أنواع البطالة</h5>
+                                <ul>
+                                    <li><strong>البطالة الدورية:</strong> ناتجة عن تراجع الاقتصاد خلال فترات الركود</li>
+                                    <li><strong>البطالة الهيكلية:</strong> ناتجة عن عدم تطابق مهارات العمال مع احتياجات سوق العمل</li>
+                                    <li><strong>البطالة الاحتكاكية:</strong> ناتجة عن الوقت الذي يستغرقه الأفراد للانتقال بين الوظائف</li>
+                                </ul>
+                            </div>
+                            <div class="card-action">
+                                <button class="expand-btn">
+                                    عرض المزيد
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="economics-card">
+                            <h4>
+                                <div class="card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                           

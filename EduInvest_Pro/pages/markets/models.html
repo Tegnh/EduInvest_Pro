@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نماذج اقتصادية عالمية - EduInvest Pro</title>
+    <link rel="stylesheet" href="../../index.css">
+    <link rel="stylesheet" href="../../css/light-theme.css" id="theme-style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .model-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: var(--card-background);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .model-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .model-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .model-tab.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .model-content {
+            display: none;
+        }
+        
+        .model-content.active {
+            display: block;
+        }
+        
+        .country-card {
+            background-color: var(--background-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .country-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+          .country-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .country-flag {
+            width: 2rem;
+            height: 1.5rem;
+            border-radius: 4px;
+            object-fit: cover;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .country-value {
+            font-weight: bold;
+        }
+        
+        .solutions-card {
+            background-color: rgba(0, 128, 0, 0.05);
+            border-right: 3px solid rgba(0, 128, 0, 0.5);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .data-card {
+            background-color: var(--background-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .analysis-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .analysis-content {
+            color: var(--text-secondary);
+        }
+        
+        .high-inflation {
+            color: #f5222d;
+        }
+        
+        .low-inflation {
+            color: #52c41a;
+        }
+        
+        .deflation {
+            color: #1890ff;
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <header>
+        <div class="logo">
+            <a href="../../index.html">
+                <h1>EduInvest Pro</h1>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-icons">
+                <li>
+                    <button id="theme-toggle" aria-label="تبديل الوضع المظلم" class="nav-button">
+                        <img src="../../assets/icons/dark-mode.svg" alt="الوضع المظلم" id="theme-icon">
+                        <span class="icon-text">الوضع الليلي</span>
+                    </button>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="الحاسبة" class="nav-button" id="calculator-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="8" y1="10" x2="10" y2="10"></line>
+                            <line x1="12" y1="10" x2="14" y2="10"></line>
+                            <line x1="16" y1="10" x2="16" y2="10"></line>
+                            <line x1="8" y1="14" x2="10" y2="14"></line>
+                            <line x1="12" y1="14" x2="14" y2="14"></line>
+                            <line x1="16" y1="14" x2="16" y2="14"></line>
+                            <line x1="8" y1="18" x2="10" y2="18"></line>
+                            <line x1="12" y1="18" x2="14" y2="18"></line>
+                            <line x1="16" y1="18" x2="16" y2="18"></line>
+                        </svg>
+                        <span class="icon-text">الحاسبة</span>
+                    </button>
+                    <div class="dropdown-menu" id="calculator-dropdown">
+                        <a href="../calculator/budget.html" class="dropdown-item">حاسبة الميزانية</a>
+                        <a href="../calculator/History.html" class="dropdown-item">سجل الميزانية</a>
+                        <a href="../calculator/investment.html" class="dropdown-item">حاسبة الاستثمار</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="الأسواق" class="nav-button" id="markets-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20V10"></path>
+                            <path d="M18 20V4"></path>
+                            <path d="M6 20V16"></path>
+                        </svg>
+                        <span class="icon-text">الأسواق</span>
+                    </button>                    <div class="dropdown-menu" id="markets-dropdown">
+                        <a href="./SA.html" class="dropdown-item">السوق السعودي</a>
+                        <a href="./US.html" class="dropdown-item">السوق الأمريكي</a>
+                        <a href="./models.html" class="dropdown-item">نماذج اقتصادية عالمية</a>
+                        <a href="./EvaluationOfCompanies.html" class="dropdown-item">تقييم الشركات</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="المالية" class="nav-button" id="finance-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                            <path d="M12 6v2"></path>
+                            <path d="M12 16v2"></path>
+                        </svg>
+                        <span class="icon-text">المالية</span>
+                    </button>
+                    <div class="dropdown-menu" id="finance-dropdown">
+                        <a href="../finance/Accounting.html" class="dropdown-item">المحاسبة</a>
+                        <a href="../finance/invesment.html" class="dropdown-item">الاستثمار</a>
+                        <a href="../finance/MIS.html" class="dropdown-item">نظم المعلومات</a>
+                        <a href="../finance/basics.html" class="dropdown-item">أساسيات الاقتصاد</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>نماذج اقتصادية عالمية</h2>
+            <p>دراسة حالات من التضخم والانكماش الاقتصادي حول العالم</p>
+        </section>        <section class="model-section">
+            <div class="model-tabs">
+                <div class="model-tab active" data-tab="high-inflation">التضخم المرتفع</div>
+                <div class="model-tab" data-tab="moderate-inflation">التضخم المعتدل</div>
+                <div class="model-tab" data-tab="low-inflation">التضخم المنخفض</div>
+                <div class="model-tab" data-tab="deflation">الانكماش الاقتصادي</div>
+            </div>
+
+            <!-- High Inflation Model -->
+            <div class="model-content active" id="high-inflation">
+                <h3 class="high-inflation">نماذج التضخم المرتفع</h3>
+                <p>تحليل دول تعاني من معدلات تضخم مرتفعة وخارج السيطرة</p>
+                
+                <div class="chart-container">
+                    <canvas id="high-inflation-chart"></canvas>
+                </div>
+                  <!-- Argentina -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/ar.svg" alt="علم الأرجنتين" class="country-flag">
+                            الأرجنتين
+                        </div>
+                        <div class="country-value high-inflation">211.4% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">أسباب التضخم المرتفع</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>طباعة نقود بدون غطاء وعجز مالي كبير</li>
+                                    <li>عدم استقرار العملة وانهيار قيمة البيزو</li>
+                                    <li>أزمة ديون خارجية متفاقمة</li>
+                                    <li>اعتماد سياسات شعبوية غير مستدامة</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="argentina-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد يعاني من اختلالات هيكلية عميقة وتضخم مزمن خارج السيطرة. محاولات الإصلاح الاقتصادي المتتالية لم تحقق استقرارًا دائمًا بسبب التقلبات السياسية وضعف المؤسسات المالية. يُعتبر نموذجًا سلبيًا للتضخم غير المسيطر عليه.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">الحلول واقتراحات التحسين</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>استقلالية البنك المركزي:</strong> تعزيز استقلال البنك المركزي الأرجنتيني وتطبيق سياسات نقدية صارمة للسيطرة على التضخم.</li>
+                                <li><strong>ضبط الإنفاق الحكومي:</strong> تحقيق انضباط مالي وخفض العجز في الموازنة من خلال ترشيد الإنفاق العام وإصلاح نظام الدعم.</li>
+                                <li><strong>إصلاحات هيكلية:</strong> تحسين بيئة الأعمال وتشجيع الاستثمارات الأجنبية وتطوير قطاعات تصديرية غير تقليدية.</li>
+                                <li><strong>إعادة هيكلة الديون:</strong> إعادة جدولة الديون الخارجية بشكل يضمن استدامتها على المدى الطويل.</li>
+                                <li><strong>استقرار مؤسسي:</strong> بناء إجماع سياسي على خطة إصلاح اقتصادي طويلة الأمد تتجاوز الدورات الانتخابية.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                  <!-- Turkey -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/tr.svg" alt="علم تركيا" class="country-flag">
+                            تركيا
+                        </div>
+                        <div class="country-value high-inflation">64.8% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">أسباب التضخم المرتفع</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>سياسات نقدية غير تقليدية (خفض الفائدة رغم التضخم)</li>
+                                    <li>تدخل سياسي في استقلالية البنك المركزي</li>
+                                    <li>انخفاض حاد في قيمة الليرة التركية</li>
+                                    <li>اعتماد كبير على الاستيراد وارتفاع أسعار الطاقة</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="turkey-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد متنوع ونشط لكنه يعاني من تضخم مرتفع نتيجة لسياسات غير تقليدية. قطاع التصنيع والسياحة قوي لكن الاستقرار الاقتصادي الكلي متدهور. يمثل نموذجًا للتضخم المرتفع نتيجة التدخلات السياسية في السياسة النقدية.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">الحلول واقتراحات التحسين</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>استعادة استقلالية البنك المركزي:</strong> التوقف عن التدخل السياسي في قرارات السياسة النقدية والسماح للبنك المركزي باتخاذ الإجراءات الضرورية لمكافحة التضخم.</li>
+                                <li><strong>سياسة نقدية تقليدية:</strong> رفع أسعار الفائدة بشكل كافٍ لاستهداف التضخم وتحقيق استقرار الليرة التركية.</li>
+                                <li><strong>تقوية احتياطيات النقد الأجنبي:</strong> بناء احتياطيات كافية للتدخل في أسواق الصرف عند الضرورة.</li>
+                                <li><strong>تنويع الصادرات:</strong> زيادة القدرة التنافسية للمنتجات التركية عالمياً وتقليل الاعتماد على الاستيراد.</li>
+                                <li><strong>تعزيز الشفافية:</strong> تحسين جودة البيانات الاقتصادية وشفافية السياسات للمستثمرين المحليين والدوليين.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                  <!-- Venezuela -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/ve.svg" alt="علم فنزويلا" class="country-flag">
+                            فنزويلا
+                        </div>
+                        <div class="country-value high-inflation">190.0% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">أسباب التضخم المرتفع</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>انهيار الإنتاج النفطي رغم الاحتياطيات الضخمة</li>
+                                    <li>اقتصاد مركزي وتدخل حكومي مفرط</li>
+                                    <li>عقوبات دولية وعزلة اقتصادية</li>
+                                    <li>فساد مؤسسي واسع النطاق</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="venezuela-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد أحادي الجانب يعتمد على النفط والذي تدهور بشدة. يمثل نموذجًا لفشل السياسات الاقتصادية وسوء الإدارة. شهدت فنزويلا تضخمًا هائلاً وصل إلى مستوى التضخم الجامح في السنوات السابقة مع انخفاض الناتج المحلي بأكثر من 75% منذ 2013.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">الحلول واقتراحات التحسين</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>إصلاح سياسي واقتصادي شامل:</strong> إعادة بناء المؤسسات الديمقراطية وحكم القانون كأساس لأي إصلاح اقتصادي.</li>
+                                <li><strong>إعادة تأهيل قطاع النفط:</strong> تحرير قطاع النفط من السيطرة الحكومية المطلقة وجذب استثمارات أجنبية لتحديث البنية التحتية المتهالكة.</li>
+                                <li><strong>تنويع الاقتصاد:</strong> تطوير قطاعات اقتصادية بديلة كالزراعة والسياحة والتعدين لتقليل الاعتماد على النفط.</li>
+                                <li><strong>الإصلاح النقدي:</strong> تبني عملة جديدة مع سياسات صارمة للسيطرة على التضخم وإعادة الثقة في النظام المالي.</li>
+                                <li><strong>مكافحة الفساد:</strong> تطوير آليات شفافة للرقابة على الموارد العامة ومكافحة الفساد المؤسسي.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                  <!-- مصر -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/eg.svg" alt="علم مصر" class="country-flag">
+                            مصر
+                        </div>
+                        <div class="country-value high-inflation">35.7% (2024)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">أسباب التضخم المرتفع</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>تحرير سعر الصرف وتخفيض قيمة الجنيه المصري</li>
+                                    <li>عجز كبير في الميزان التجاري والموازنة العامة</li>
+                                    <li>ارتفاع أسعار الطاقة والمواد الغذائية عالمياً</li>
+                                    <li>اعتماد كبير على الاستيراد للسلع الأساسية</li>
+                                    <li>صدمات العرض بسبب الصراعات الإقليمية</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="egypt-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد متنوع نسبياً لكنه يواجه تحديات هيكلية كبيرة. التضخم المرتفع يؤثر سلباً على القدرة الشرائية للمواطنين ويزيد من معدلات الفقر. برنامج الإصلاح الاقتصادي مع صندوق النقد الدولي يهدف للسيطرة على التضخم لكن التكلفة الاجتماعية مرتفعة.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">الحلول واقتراحات التحسين</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>تعزيز الإنتاج المحلي:</strong> زيادة الدعم للمزارعين والمصنعين المحليين لتقليل الاعتماد على الاستيراد وتحسين الميزان التجاري.</li>
+                                <li><strong>تشجيع الاستثمار المباشر:</strong> تحسين بيئة الأعمال وتبسيط الإجراءات البيروقراطية لجذب استثمارات أجنبية مباشرة في قطاعات إنتاجية.</li>
+                                <li><strong>الإصلاح الضريبي:</strong> توسيع القاعدة الضريبية وزيادة كفاءة التحصيل الضريبي لزيادة الإيرادات دون زيادة العبء على المواطنين.</li>
+                                <li><strong>تطوير القطاعات التصديرية:</strong> دعم الصناعات التصديرية ذات القيمة المضافة العالية مثل تكنولوجيا المعلومات والخدمات والصناعات الهندسية.</li>
+                                <li><strong>شبكات أمان اجتماعي:</strong> تحسين كفاءة برامج الدعم الاجتماعي للتخفيف من الآثار السلبية للإصلاحات الاقتصادية على الطبقات الفقيرة والمتوسطة.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                  <!-- زيمبابوي -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/zw.svg" alt="علم زيمبابوي" class="country-flag">
+                            زيمبابوي
+                        </div>
+                        <div class="country-value high-inflation">47.6% (2024)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">أسباب التضخم المرتفع</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>تاريخ من التضخم المفرط (تضخم قياسي عام 2008)</li>
+                                    <li>طباعة النقود لتمويل العجز المالي</li>
+                                    <li>عدم استقرار العملة المحلية وتعدد أنظمة الصرف</li>
+                                    <li>انخفاض الإنتاجية في القطاعات الرئيسية</li>
+                                    <li>عقوبات اقتصادية وعزلة دولية نسبية</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="zimbabwe-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد يتعافى بصعوبة من فترة تضخم مفرط تاريخي. دولرة الاقتصاد ساعدت في تخفيض معدلات التضخم من المستويات القياسية، لكن عدم الاستقرار النقدي لا يزال يشكل تحدياً كبيراً. قطاع التعدين يمثل فرصة للتعافي الاقتصادي.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">الحلول واقتراحات التحسين</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>انضباط مالي صارم:</strong> وقف تمويل العجز المالي عن طريق طباعة النقود واعتماد موازنة متوازنة.</li>
+                                <li><strong>استقرار العملة:</strong> تبني نظام عملة مستقر إما من خلال دولرة كاملة أو نظام مجلس عملة يضمن ربط إصدار العملة المحلية باحتياطيات أجنبية.</li>
+                                <li><strong>إصلاحات القطاع الزراعي:</strong> إعادة هيكلة القطاع الزراعي وتقديم حلول مستدامة لمشكلات ملكية الأراضي لاستعادة الإنتاج الزراعي.</li>
+                                <li><strong>تطوير قطاع التعدين:</strong> استثمار أكبر في قطاع التعدين مع ضمان شفافية وعدالة في توزيع العوائد.</li>
+                                <li><strong>إعادة الاندماج الدولي:</strong> تحسين العلاقات الدولية وإجراء إصلاحات سياسية واقتصادية لرفع العقوبات وجذب الاستثمارات الأجنبية.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moderate Inflation Model -->
+            <div class="model-content" id="moderate-inflation">
+                <h3 style="color: #52c41a;">نماذج التضخم المعتدل</h3>
+                <p>تحليل دول تحافظ على معدلات تضخم معتدلة ومتحكم بها</p>
+                
+                <div class="chart-container">
+                    <canvas id="moderate-inflation-chart"></canvas>
+                </div>
+                  <!-- المملكة العربية السعودية -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/sa.svg" alt="علم المملكة العربية السعودية" class="country-flag">
+                            المملكة العربية السعودية
+                        </div>
+                        <div class="country-value" style="color: #52c41a;">2.3% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">عوامل استقرار التضخم</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>سياسة نقدية حكيمة مع ربط الريال بالدولار</li>
+                                    <li>احتياطيات مالية ضخمة تعزز الاستقرار</li>
+                                    <li>دعم السلع الأساسية والطاقة محلياً</li>
+                                    <li>سياسات التنويع الاقتصادي ضمن رؤية 2030</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="saudi-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد قوي مع قاعدة نفطية صلبة وجهود حثيثة للتنويع الاقتصادي. مستويات التضخم المعتدلة تسهم في استقرار القوة الشرائية وتشجيع الاستثمار. تعتبر السعودية نموذجاً للاقتصادات النفطية الناجحة في إدارة التضخم رغم تقلبات أسعار النفط العالمية.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">اقتراحات التحسين والتطوير</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>تسريع التنويع الاقتصادي:</strong> مواصلة تطوير القطاعات غير النفطية مثل السياحة والترفيه والخدمات اللوجستية والتكنولوجيا.</li>
+                                <li><strong>تعزيز القطاع الخاص:</strong> زيادة مشاركة القطاع الخاص في الاقتصاد وتحفيز ريادة الأعمال لخلق فرص عمل مستدامة للمواطنين.</li>
+                                <li><strong>تطوير رأس المال البشري:</strong> الاستثمار في التعليم والتدريب المهني لبناء قوى عاملة وطنية ذات مهارات عالية تناسب متطلبات الاقتصاد الحديث.</li>
+                                <li><strong>الاستدامة البيئية:</strong> تسريع التحول نحو مصادر الطاقة المتجددة والاقتصاد الأخضر لضمان استدامة النمو الاقتصادي على المدى البعيد.</li>
+                                <li><strong>تعزيز حوكمة الشركات:</strong> تطوير أطر حوكمة الشركات لتحسين الشفافية وكفاءة الأسواق المالية وجذب المزيد من الاستثمارات الأجنبية.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                  <!-- ألمانيا -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/de.svg" alt="علم ألمانيا" class="country-flag">
+                            ألمانيا
+                        </div>
+                        <div class="country-value" style="color: #52c41a;">3.8% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">عوامل استقرار التضخم</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>سياسة نقدية مستقلة من البنك المركزي الأوروبي</li>
+                                    <li>قطاع صناعي قوي وذو إنتاجية عالية</li>
+                                    <li>ثقافة اجتماعية تميل للادخار والاستهلاك المسؤول</li>
+                                    <li>إطار تنظيمي قوي للأسواق والعمالة</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="germany-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد صناعي متطور يعتمد على قطاعات التصنيع والتصدير. تاريخياً، حافظت ألمانيا على معدلات تضخم منخفضة، لكن أزمة الطاقة الأخيرة والتوترات الجيوسياسية أدت إلى ارتفاع نسبي في التضخم. تمثل ألمانيا نموذجاً للاقتصادات الصناعية المستقرة مع قدرة على التعافي من الصدمات الخارجية.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">اقتراحات التحسين والتطوير</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>تحول الطاقة:</strong> تسريع التحول إلى مصادر الطاقة المتجددة وتقليل الاعتماد على الواردات الخارجية لتحقيق أمن الطاقة وخفض تكاليفها.</li>
+                                <li><strong>التحديث الرقمي:</strong> تعزيز البنية التحتية الرقمية والرقمنة في القطاعين العام والخاص لتحسين الإنتاجية والحفاظ على القدرة التنافسية.</li>
+                                <li><strong>معالجة التحديات الديموغرافية:</strong> اعتماد سياسات فعالة لمواجهة شيخوخة السكان من خلال زيادة الهجرة الماهرة وتحسين معدلات المشاركة في القوى العاملة.</li>
+                                <li><strong>تنويع الشركاء التجاريين:</strong> تقليل الاعتماد على أسواق معينة مثل الصين وتعزيز العلاقات التجارية مع أسواق ناشئة جديدة.</li>
+                                <li><strong>الاستثمار في الابتكار:</strong> زيادة الإنفاق على البحث والتطوير في مجالات التكنولوجيا المتقدمة كالذكاء الاصطناعي والتقنيات النظيفة للحفاظ على الريادة الصناعية.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الإمارات العربية المتحدة -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/ae.svg" alt="علم الإمارات العربية المتحدة" class="country-flag">
+                            الإمارات العربية المتحدة
+                        </div>
+                        <div class="country-value" style="color: #52c41a;">3.0% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">عوامل استقرار التضخم</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>تنويع اقتصادي ناجح وتقليل الاعتماد على النفط</li>
+                                    <li>سياسات مالية ونقدية متوازنة</li>
+                                    <li>انفتاح اقتصادي واستقطاب استثمارات أجنبية</li>
+                                    <li>بنية تحتية متطورة تدعم الكفاءة الاقتصادية</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="uae-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد متنوع نجح في تقليل الاعتماد على النفط عبر تطوير قطاعات التجارة والسياحة والخدمات المالية. تمثل الإمارات نموذجاً ناجحاً للتنمية الاقتصادية المستدامة في المنطقة مع استقرار اقتصادي كلي ومستويات تضخم معتدلة.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">اقتراحات التحسين والتطوير</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>تعميق التنويع الاقتصادي:</strong> مواصلة تعزيز قطاعات الاقتصاد المعرفي كالذكاء الاصطناعي والتكنولوجيا المالية والاقتصاد الأخضر لضمان النمو المستدام.</li>
+                                <li><strong>تطوير رأس المال البشري المحلي:</strong> زيادة الاستثمار في التعليم والتدريب المهني لتعزيز مشاركة المواطنين في القطاع الخاص وتقليل الاعتماد على العمالة الوافدة.</li>
+                                <li><strong>تعزيز المرونة الاقتصادية:</strong> تطوير آليات استباقية للتعامل مع التقلبات العالمية وتأثير التغير المناخي على الاقتصاد على المدى البعيد.</li>
+                                <li><strong>تطوير الأمن الغذائي:</strong> الاستثمار في التقنيات الزراعية المتقدمة كالزراعة العمودية وتحلية المياه المستدامة لتعزيز الاكتفاء الذاتي في السلع الأساسية.</li>
+                                <li><strong>تحسين كفاءة القطاع العام:</strong> مواصلة تطوير الحكومة الرقمية وتبسيط الإجراءات البيروقراطية لزيادة كفاءة الخدمات الحكومية وتقليل النفقات التشغيلية.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Low Inflation Model -->
+            <div class="model-content" id="low-inflation">
+                <h3 class="low-inflation">نماذج التضخم المنخفض</h3>
+                <p>تحليل دول تحافظ على معدلات تضخم منخفضة ومستقرة</p>
+                
+                <div class="chart-container">
+                    <canvas id="low-inflation-chart"></canvas>
+                </div>
+                
+                <!-- Switzerland -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/ch.svg" alt="علم سويسرا" class="country-flag">
+                            سويسرا
+                        </div>
+                        <div class="country-value low-inflation">1.9% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">عوامل استقرار التضخم</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>استقلالية البنك المركزي وسياسات نقدية متحفظة</li>
+                                    <li>قوة العملة واستقرارها كملاذ آمن</li>
+                                    <li>إنتاجية عالية وقطاعات عالية القيمة المضافة</li>
+                                    <li>استقرار سياسي ومؤسسي طويل الأمد</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="switzerland-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد متطور ومتنوع مع تركيز على قطاعات عالية القيمة مثل الخدمات المالية والصناعات الدقيقة. يمثل نموذجًا إيجابيًا للاستقرار الاقتصادي والنقدي والمؤسسي، مع سياسات نقدية تركز على استقرار الأسعار على المدى الطويل.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">اقتراحات التحسين والتطوير</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>مواكبة التحول الرقمي:</strong> تشجيع الابتكار في مجالات التكنولوجيا المالية والذكاء الاصطناعي للحفاظ على تنافسية القطاع المالي السويسري عالمياً.</li>
+                                <li><strong>تنويع علاقات التجارة الدولية:</strong> توسيع الشراكات التجارية مع الأسواق الناشئة لتقليل الاعتماد على الاتحاد الأوروبي وتحسين المرونة التجارية.</li>
+                                <li><strong>معالجة تكاليف المعيشة المرتفعة:</strong> تطوير حلول مبتكرة لخفض تكاليف السكن والرعاية الصحية دون المساس بالجودة العالية للخدمات.</li>
+                                <li><strong>التحول نحو الاقتصاد الأخضر:</strong> تسريع عملية التحول إلى مصادر الطاقة المتجددة وتشجيع الاستثمارات المستدامة لتقليل البصمة الكربونية.</li>
+                                <li><strong>الاستثمار في التعليم المستقبلي:</strong> تعزيز نظام التدريب المهني والتعليم العالي ليشمل المهارات المستقبلية والتكنولوجيات الناشئة.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Japan -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/jp.svg" alt="علم اليابان" class="country-flag">
+                            اليابان
+                        </div>
+                        <div class="country-value low-inflation">3.1% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">عوامل استقرار التضخم</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>شيخوخة السكان وتباطؤ النمو السكاني</li>
+                                    <li>ثقافة استهلاكية أكثر تحفظًا</li>
+                                    <li>نظام توزيع متعدد المستويات يحد من تمرير الزيادات السعرية</li>
+                                    <li>تقدم تقني عالٍ يؤدي لكفاءة إنتاجية</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="japan-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد متطور ذو قدرة تصنيعية عالية لكنه يواجه تحديات ديموغرافية كبيرة. عانى اليابان من تضخم منخفض للغاية أو انكماش لعقود، وهو يمثل نموذجًا فريدًا للتحديات التي تواجه الاقتصادات المتقدمة ذات النمو البطيء.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">اقتراحات التحسين والتطوير</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>إصلاح سوق العمل:</strong> تشجيع مشاركة أكبر للمرأة في سوق العمل وتخفيف قيود الهجرة لمواجهة نقص العمالة الناتج عن شيخوخة السكان.</li>
+                                <li><strong>تحفيز الطلب المحلي:</strong> تغيير السياسات الضريبية وتشجيع زيادة الأجور لتعزيز الاستهلاك المحلي وتقليل الاعتماد على الصادرات.</li>
+                                <li><strong>تعزيز الابتكار والإنتاجية:</strong> زيادة الاستثمار في البحث والتطوير والتكنولوجيا المتقدمة كالروبوتات والذكاء الاصطناعي لتعويض تراجع القوى العاملة.</li>
+                                <li><strong>إصلاح نظام التقاعد:</strong> تطوير نظام معاشات مستدام يتناسب مع زيادة متوسط العمر المتوقع ويقلل العبء على الجيل العامل.</li>
+                                <li><strong>تعزيز الشركات الناشئة:</strong> تخفيف القيود التنظيمية وتوفير حوافز للشركات الناشئة لتنشيط الاقتصاد وخلق مصادر جديدة للنمو.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- سنغافورة -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/sg.svg" alt="علم سنغافورة" class="country-flag">
+                            سنغافورة
+                        </div>
+                        <div class="country-value low-inflation">2.0% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">عوامل استقرار التضخم</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>سياسة نقدية مستقرة تركز على سعر الصرف</li>
+                                    <li>انفتاح اقتصادي وكفاءة سلاسل التوريد</li>
+                                    <li>إنتاجية عمالية عالية وحوكمة فعالة</li>
+                                    <li>الاستثمار المستمر في البنية التحتية والتكنولوجيا</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="singapore-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                اقتصاد متقدم عالي الكفاءة مع تركيز على الخدمات المالية والتجارة والتكنولوجيا. تعتمد سنغافورة سياسة نقدية فريدة تركز على استقرار سعر الصرف بدلاً من استهداف التضخم مباشرة، مما أدى إلى استقرار أسعار طويل الأمد رغم اعتمادها الكبير على التجارة الخارجية.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">اقتراحات التحسين والتطوير</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>تعزيز الأمن المائي والغذائي:</strong> تطوير تكنولوجيا إنتاج الغذاء المحلي والاستثمار في حلول معالجة المياه المستدامة لتقليل الاعتماد على الواردات.</li>
+                                <li><strong>التكيف مع تغير المناخ:</strong> تسريع استثمارات البنية التحتية لمواجهة ارتفاع مستوى سطح البحر وتعزيز تدابير الاستدامة والطاقة النظيفة.</li>
+                                <li><strong>تنويع الشركاء التجاريين:</strong> تقليل الاعتماد على الأسواق الرئيسية من خلال توسيع العلاقات التجارية مع الأسواق الناشئة في أفريقيا وأمريكا اللاتينية.</li>
+                                <li><strong>تطوير الشركات المحلية:</strong> تعزيز قدرة الشركات السنغافورية على المنافسة عالمياً من خلال برامج تشجيع الابتكار والتوسع الدولي.</li>
+                                <li><strong>معالجة تحديات الشيخوخة السكانية:</strong> تطوير نظام رعاية كبار السن وإعادة تصميم بيئة العمل للاستفادة من خبرات العمال المسنين.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الصين -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/cn.svg" alt="علم الصين" class="country-flag">
+                            الصين
+                        </div>
+                        <div class="country-value low-inflation">0.2% (2023)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">عوامل استقرار التضخم</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>تدخل حكومي مباشر في الأسعار والإنتاج</li>
+                                    <li>إنتاج محلي ضخم يقلل الاعتماد على الاستيراد</li>
+                                    <li>استثمارات واسعة في البنية التحتية والطاقة</li>
+                                    <li>مخاوف فعلية من الانكماش في الفترة الأخيرة</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="china-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم الوضع الاقتصادي</div>
+                            <div class="analysis-content">
+                                ثاني أكبر اقتصاد عالمي يواجه تحولاً هيكلياً من اقتصاد تصنيعي إلى اقتصاد مدفوع بالاستهلاك والخدمات. التضخم المنخفض جداً في الصين حالياً يشكل تحدياً اقتصادياً جديداً، حيث تحاول الحكومة تحفيز الطلب المحلي وتجنب مخاطر الانكماش.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">اقتراحات التحسين والتطوير</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>تحفيز الاستهلاك المحلي:</strong> تقوية شبكات الضمان الاجتماعي وتحسين نظام التقاعد لتشجيع المستهلكين على تقليل الادخار الاحترازي وزيادة الإنفاق.</li>
+                                <li><strong>إصلاح سوق العقارات:</strong> معالجة فقاعة العقارات بطريقة تدريجية لتفادي انهيار القطاع مع ضمان توفر سكن بأسعار معقولة للطبقة المتوسطة.</li>
+                                <li><strong>التحول نحو النمو الأخضر:</strong> تسريع الانتقال من الصناعات كثيفة الانبعاثات إلى قطاعات التكنولوجيا النظيفة والاقتصاد الدائري لتحقيق أهداف الحياد الكربوني.</li>
+                                <li><strong>تعزيز الابتكار المحلي:</strong> زيادة الاستثمار في البحث والتطوير والملكية الفكرية لتحريك سلسلة القيمة نحو المنتجات والخدمات عالية التقنية.</li>
+                                <li><strong>إدارة التوترات التجارية:</strong> تنويع الشركاء التجاريين وتعزيز العلاقات الاقتصادية مع دول "مبادرة الحزام والطريق" لتقليل مخاطر تقييد الوصول إلى الأسواق الغربية.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deflation Model -->
+            <div class="model-content" id="deflation">
+                <h3 class="deflation">نماذج الانكماش الاقتصادي</h3>
+                <p>تحليل دول تعاني من انخفاض مستمر في المستوى العام للأسعار</p>
+                
+                <div class="chart-container">
+                    <canvas id="deflation-chart"></canvas>
+                </div>
+                
+                <!-- Japan Historical -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/jp.svg" alt="علم اليابان" class="country-flag">
+                            اليابان (1995-2015)
+                        </div>
+                        <div class="country-value deflation">-0.5% (متوسط)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">أسباب الانكماش</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>انفجار فقاعة أسعار الأصول في أوائل التسعينات</li>
+                                    <li>ديون مرتفعة للشركات والمستهلكين</li>
+                                    <li>شيخوخة السكان وتقلص اليد العاملة</li>
+                                    <li>تأجيل المستهلكين للشراء توقعًا لانخفاض الأسعار</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">آثار الانكماش</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>ركود اقتصادي طويل الأمد "العقد الضائع"</li>
+                                    <li>ارتفاع القيمة الحقيقية للديون</li>
+                                    <li>تباطؤ الاستثمار والإنتاج</li>
+                                    <li>انخفاض النمو الاقتصادي</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم النموذج</div>
+                            <div class="analysis-content">
+                                يمثل اليابان أوضح نموذج معاصر للانكماش طويل الأمد في اقتصاد متقدم. هذا النموذج يبرز مخاطر دورة الانكماش والتحديات التي تواجه السياسة النقدية في بيئة أسعار الفائدة قرب الصفر، حيث أصبحت السياسة النقدية أقل فعالية.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">الدروس المستفادة والتحسينات المقترحة</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>استجابة سريعة لأزمات الأصول:</strong> معالجة فقاعات الأصول بشكل استباقي والتدخل المبكر لإعادة هيكلة القطاع المصرفي وتنظيف الميزانيات العمومية من القروض المتعثرة.</li>
+                                <li><strong>تنسيق السياسات النقدية والمالية:</strong> تبني مزيج متناسق من السياسات التوسعية النقدية والمالية معًا، بدلاً من الاعتماد على أداة واحدة فقط.</li>
+                                <li><strong>استهداف توقعات التضخم:</strong> تطوير أدوات سياسية لتغيير توقعات التضخم والتصدي لعقلية الانكماش المترسخة لدى المستهلكين والشركات.</li>
+                                <li><strong>إصلاحات هيكلية جريئة:</strong> تنفيذ إصلاحات سوق العمل وتحرير القطاعات المحمية وتشجيع المنافسة لتحسين النمو المحتمل للاقتصاد.</li>
+                                <li><strong>سياسات ديموغرافية استباقية:</strong> معالجة تحديات شيخوخة السكان من خلال سياسات الهجرة والتكنولوجيا وزيادة مشاركة المرأة في سوق العمل قبل تفاقم المشكلة.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- اليونان -->                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/gr.svg" alt="علم اليونان" class="country-flag">
+                            اليونان (2013-2016)
+                        </div>
+                        <div class="country-value deflation">-1.4% (متوسط)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">أسباب الانكماش</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>أزمة ديون سيادية حادة وبرامج تقشف صارمة</li>
+                                    <li>انخفاض الطلب المحلي وارتفاع البطالة</li>
+                                    <li>قيود الاتحاد النقدي الأوروبي على السياسة النقدية</li>
+                                    <li>تراكم الديون وانهيار الثقة في الاقتصاد</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="greece-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">آثار الانكماش</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>انكماش اقتصادي حاد بلغ 25% من الناتج المحلي</li>
+                                    <li>ارتفاع معدلات البطالة إلى أكثر من 27%</li>
+                                    <li>تفاقم أزمة الديون بسبب انخفاض الناتج المحلي</li>
+                                    <li>أزمة اجتماعية وسياسية واسعة النطاق</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم النموذج</div>
+                            <div class="analysis-content">
+                                تمثل اليونان نموذجاً لانكماش ناتج عن أزمة ديون وسياسات تقشف صارمة في إطار اتحاد نقدي. تبرز هذه الحالة محدودية الخيارات المتاحة للدول التي تفقد السيطرة على سياستها النقدية، وصعوبة الخروج من دوامة الانكماش في ظل ارتفاع الديون.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">اقتراحات التحسين والتطوير</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>إعادة هيكلة الديون:</strong> التفاوض على شروط أكثر استدامة للديون السيادية مع تخفيف عبء الفوائد وتمديد آجال السداد لخلق مساحة مالية للنمو.</li>
+                                <li><strong>تطوير قطاعات تنافسية:</strong> الاستثمار في القطاعات التي تتمتع فيها اليونان بميزة تنافسية مثل السياحة والطاقة المتجددة والنقل البحري والزراعة العضوية.</li>
+                                <li><strong>مكافحة التهرب الضريبي:</strong> تحديث النظام الضريبي وتعزيز آليات تحصيل الضرائب مع تبسيط الإجراءات لتوسيع القاعدة الضريبية وزيادة الإيرادات.</li>
+                                <li><strong>تحديث الإدارة العامة:</strong> تقليص البيروقراطية وتبسيط الإجراءات الإدارية مع رقمنة الخدمات الحكومية لتحسين بيئة الأعمال وجذب الاستثمارات.</li>
+                                <li><strong>توجيه الاستثمارات الأوروبية:</strong> استخدام التمويل الأوروبي بكفاءة في مشاريع البنية التحتية والتحول الرقمي والطاقة المتجددة لتعزيز النمو طويل الأجل.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- إيطاليا -->                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">
+                            <img src="https://flagcdn.com/it.svg" alt="علم إيطاليا" class="country-flag">
+                            إيطاليا (2014-2016)
+                        </div>
+                        <div class="country-value deflation">-0.1% (متوسط)</div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="data-card">
+                            <div class="analysis-title">أسباب الانكماش</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>ضعف هيكلي طويل الأمد في الاقتصاد الإيطالي</li>
+                                    <li>تأثر شديد بالأزمة المالية العالمية وأزمة اليورو</li>
+                                    <li>انخفاض الطلب المحلي وتراجع القدرة التنافسية</li>
+                                    <li>ارتفاع نسبة الدين العام وتكاليف خدمة الدين</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تكوين الاقتصاد</div>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="italy-economy-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">آثار الانكماش</div>
+                            <div class="analysis-content">
+                                <ul>
+                                    <li>نمو اقتصادي منخفض أو سلبي لعدة سنوات</li>
+                                    <li>تراكم الديون وارتفاع نسبتها من الناتج المحلي</li>
+                                    <li>ارتفاع البطالة وخاصة في صفوف الشباب</li>
+                                    <li>تحديات في القطاع المصرفي والقروض المتعثرة</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <div class="analysis-title">تقييم النموذج</div>
+                            <div class="analysis-content">
+                                يمثل الاقتصاد الإيطالي نموذجاً للانكماش في اقتصاد متقدم بسبب تحديات هيكلية وديموغرافية. يبرز هذا النموذج صعوبة الخروج من فترات الانكماش في ظل محدودية الأدوات المالية والنقدية خاصة ضمن الاتحاد النقدي الأوروبي.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solutions-card">
+                        <div class="analysis-title">اقتراحات التحسين والتطوير</div>
+                        <div class="analysis-content">
+                            <ul>
+                                <li><strong>إصلاح النظام القضائي والإداري:</strong> تسريع الإجراءات القضائية وتحديث النظام البيروقراطي لتحسين بيئة الأعمال وجذب الاستثمارات.</li>
+                                <li><strong>تطوير المشاريع الصغيرة والمتوسطة:</strong> توفير حلول تمويلية مبتكرة ودعم الابتكار للمشاريع الصغيرة والمتوسطة التي تمثل عماد الاقتصاد الإيطالي.</li>
+                                <li><strong>معالجة التحديات الديموغرافية:</strong> تطوير سياسات تشجع الإنجاب ودمج المهاجرين وزيادة مشاركة المرأة في سوق العمل لمواجهة شيخوخة السكان.</li>
+                                <li><strong>تقليص الفجوة بين الشمال والجنوب:</strong> تطوير البنية التحتية والاستثمار في التعليم والابتكار في جنوب إيطاليا لتحقيق نمو إقليمي متوازن.</li>
+                                <li><strong>الاستفادة من صندوق التعافي الأوروبي:</strong> توظيف التمويل الأوروبي في التحول الرقمي والأخضر وتحديث البنية التحتية لتعزيز النمو المستدام على المدى الطويل.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div></div>
+        </section>
+        
+        <section class="model-section">
+            <h3>تحليل مقارن بين النماذج الاقتصادية</h3>
+            <p>مقارنة شاملة بين نماذج التضخم والانكماش المختلفة وتأثيراتها على الاقتصاد والاستثمار</p>
+            
+            <div class="grid-container">
+                <div class="data-card">
+                    <div class="analysis-title">تأثير معدلات التضخم على المستثمرين</div>
+                    <div class="analysis-content">
+                        <ul>
+                            <li><strong>التضخم المرتفع:</strong> يؤدي إلى تآكل القيمة الحقيقية للنقود والأصول ذات الدخل الثابت. يميل المستثمرون للاتجاه نحو الأصول العينية والسلع كالذهب والعقارات.</li>
+                            <li><strong>التضخم المعتدل:</strong> بيئة مستقرة نسبياً للاستثمار مع نمو معتدل في الأسهم والعقارات، وعوائد إيجابية معتدلة على السندات.</li>
+                            <li><strong>التضخم المنخفض:</strong> قد يؤدي إلى انخفاض أسعار الفائدة مما يعزز سوق الأسهم وأسعار العقارات، لكنه يضر بعوائد أدوات الدخل الثابت.</li>
+                            <li><strong>الانكماش:</strong> قد يؤدي إلى ارتفاع القيمة الحقيقية للنقود والديون، مما يضر بالمقترضين ويفيد المقرضين. ضغط سلبي على أرباح الشركات وأسعار الأصول.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <div class="analysis-title">أدوات السياسة النقدية والمالية</div>
+                    <div class="analysis-content">
+                        <ul>
+                            <li><strong>لمكافحة التضخم المرتفع:</strong> رفع أسعار الفائدة، تقليص المعروض النقدي، سياسات مالية انكماشية، تقوية العملة المحلية.</li>
+                            <li><strong>لتحفيز الاقتصاد في حالة الانكماش:</strong> خفض أسعار الفائدة، التيسير الكمي، زيادة الإنفاق الحكومي، سياسات ضريبية تحفيزية.</li>
+                            <li><strong>للحفاظ على التضخم المعتدل:</strong> توازن دقيق في السياسات النقدية والمالية، استقلالية البنك المركزي، استهداف معدل تضخم محدد.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <div class="analysis-title">استراتيجيات التنويع الجغرافي للمستثمرين</div>
+                    <div class="analysis-content">
+                        <p>يمكن للمستثمرين الاستفادة من تنويع استثماراتهم عبر اقتصادات بمعدلات تضخم مختلفة:</p>
+                        <ul>
+                            <li>اقتصادات التضخم المرتفع: فرص في قطاعات السلع الأساسية والموارد الطبيعية.</li>
+                            <li>اقتصادات التضخم المعتدل: فرص متوازنة في الأسهم والسندات والعقارات.</li>
+                            <li>اقتصادات التضخم المنخفض: فرص في الأسهم ذات النمو والشركات التكنولوجية.</li>
+                            <li>اقتصادات الانكماش: فرص في السندات الحكومية والنقد والشركات ذات الميزانيات القوية.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container" style="margin-top: 2rem;">
+                <canvas id="inflation-investment-comparison"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 EduInvest Pro. جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="../../JS/theme-switcher.js"></script>
+    <script src="../../JS/Markets/modelother.js"></script>
+</body>
+</html>

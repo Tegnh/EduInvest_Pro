@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقييم الشركات - EduInvest Pro</title>
+    <link rel="stylesheet" href="../../index.css">
+    <link rel="stylesheet" href="../../css/light-theme.css" id="theme-style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .evaluation-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: var(--card-background);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--background-primary);
+            color: var(--text-primary);
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--accent-color);
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-dark);
+        }
+        
+        .method-card {
+            background-color: var(--background-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .method-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .result-card {
+            background-color: var(--background-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .result-label {
+            font-weight: 500;
+        }
+        
+        .result-value {
+            font-weight: 600;
+        }
+        
+        .evaluation-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .evaluation-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .evaluation-tab.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .evaluation-content {
+            display: none;
+        }
+        
+        .evaluation-content.active {
+            display: block;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.8rem;
+            text-align: right;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comparison-table th {
+            background-color: var(--background-secondary);
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <header>
+        <div class="logo">
+            <a href="../../index.html">
+                <h1>EduInvest Pro</h1>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-icons">
+                <li>
+                    <button id="theme-toggle" aria-label="تبديل الوضع المظلم" class="nav-button">
+                        <img src="../../assets/icons/dark-mode.svg" alt="الوضع المظلم" id="theme-icon">
+                        <span class="icon-text">الوضع الليلي</span>
+                    </button>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="الحاسبة" class="nav-button" id="calculator-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="8" y1="10" x2="10" y2="10"></line>
+                            <line x1="12" y1="10" x2="14" y2="10"></line>
+                            <line x1="16" y1="10" x2="16" y2="10"></line>
+                            <line x1="8" y1="14" x2="10" y2="14"></line>
+                            <line x1="12" y1="14" x2="14" y2="14"></line>
+                            <line x1="16" y1="14" x2="16" y2="14"></line>
+                            <line x1="8" y1="18" x2="10" y2="18"></line>
+                            <line x1="12" y1="18" x2="14" y2="18"></line>
+                            <line x1="16" y1="18" x2="16" y2="18"></line>
+                        </svg>
+                        <span class="icon-text">الحاسبة</span>
+                    </button>
+                    <div class="dropdown-menu" id="calculator-dropdown">
+                        <a href="../calculator/budget.html" class="dropdown-item">حاسبة الميزانية</a>
+                        <a href="../calculator/History.html" class="dropdown-item">سجل الميزانية</a>
+                        <a href="../calculator/investment.html" class="dropdown-item">حاسبة الاستثمار</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="الأسواق" class="nav-button" id="markets-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20V10"></path>
+                            <path d="M18 20V4"></path>
+                            <path d="M6 20V16"></path>
+                        </svg>
+                        <span class="icon-text">الأسواق</span>
+                    </button>                    <div class="dropdown-menu" id="markets-dropdown">
+                        <a href="./SA.html" class="dropdown-item">السوق السعودي</a>
+                        <a href="./US.html" class="dropdown-item">السوق الأمريكي</a>
+                        <a href="./models.html" class="dropdown-item">نماذج اقتصادية عالمية</a>
+                        <a href="./EvaluationOfCompanies.html" class="dropdown-item">تقييم الشركات</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button aria-label="المالية" class="nav-button" id="finance-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                            <path d="M12 6v2"></path>
+                            <path d="M12 16v2"></path>
+                        </svg>
+                        <span class="icon-text">المالية</span>
+                    </button>
+                    <div class="dropdown-menu" id="finance-dropdown">
+                        <a href="../finance/Accounting.html" class="dropdown-item">المحاسبة</a>
+                        <a href="../finance/invesment.html" class="dropdown-item">الاستثمار</a>
+                        <a href="../finance/MIS.html" class="dropdown-item">نظم المعلومات</a>
+                        <a href="../finance/basics.html" class="dropdown-item">أساسيات الاقتصاد</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>تقييم الشركات</h2>
+            <p>تحليل وتقييم القيمة السوقية للشركات باستخدام طرق التقييم المختلفة</p>
+        </section>
+
+        <section class="evaluation-section">
+            <div class="evaluation-tabs">
+                <div class="evaluation-tab active" data-tab="data-entry">إدخال البيانات</div>
+                <div class="evaluation-tab" data-tab="fundamental">التحليل الأساسي</div>
+                <div class="evaluation-tab" data-tab="technical">التحليل الفني</div>
+                <div class="evaluation-tab" data-tab="comparison">المقارنة بين الشركات</div>
+            </div>
+
+            <!-- Data Entry Tab -->
+            <div class="evaluation-content active" id="data-entry">
+                <h3>إدخال بيانات الشركة</h3>
+                <form id="company-data-form">
+                    <div class="form-group">
+                        <label for="company-name">اسم الشركة</label>
+                        <input type="text" id="company-name" placeholder="أدخل اسم الشركة">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="stock-price">سعر السهم الحالي</label>
+                            <input type="number" id="stock-price" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="outstanding-shares">عدد الأسهم المصدرة (بالمليون)</label>
+                            <input type="number" id="outstanding-shares" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="net-income">صافي الدخل السنوي (بالمليون)</label>
+                            <input type="number" id="net-income" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="total-revenue">إجمالي الإيرادات (بالمليون)</label>
+                            <input type="number" id="total-revenue" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="total-assets">إجمالي الأصول (بالمليون)</label>
+                            <input type="number" id="total-assets" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="total-debt">إجمالي الديون (بالمليون)</label>
+                            <input type="number" id="total-debt" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dividend">توزيعات الأرباح السنوية للسهم</label>
+                            <input type="number" id="dividend" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="expected-growth">معدل النمو المتوقع (%)</label>
+                            <input type="number" id="expected-growth" step="0.1" placeholder="0.0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sector">القطاع</label>
+                            <select id="sector">
+                                <option value="">اختر القطاع</option>
+                                <option value="technology">التكنولوجيا</option>
+                                <option value="finance">المالية والبنوك</option>
+                                <option value="energy">الطاقة</option>
+                                <option value="healthcare">الرعاية الصحية</option>
+                                <option value="consumer">السلع الاستهلاكية</option>
+                                <option value="industrial">الصناعات</option>
+                                <option value="realestate">العقارات</option>
+                                <option value="telecom">الاتصالات</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="risk-free-rate">معدل العائد الخالي من المخاطر (%)</label>
+                            <input type="number" id="risk-free-rate" step="0.01" value="4.00" placeholder="4.00">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="historical-data">بيانات سعر السهم التاريخية (اختياري)</label>
+                            <input type="file" id="historical-data" accept=".csv, .xlsx">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="calculate-btn">تحليل وتقييم الشركة</button>
+                </form>
+                
+                <div class="result-card" id="company-summary" style="display: none;">
+                    <h3>ملخص بيانات الشركة</h3>
+                    <!-- This will be populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Fundamental Analysis Tab -->
+            <div class="evaluation-content" id="fundamental">
+                <h3>التحليل الأساسي للشركة</h3>
+                
+                <div class="method-card">
+                    <div class="method-title">
+                        <span>مضاعفات التقييم</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="multiples-chart"></canvas>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="industry-pe">متوسط P/E للقطاع</label>
+                            <input type="number" id="industry-pe" step="0.01" value="15.00" placeholder="15.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="industry-pb">متوسط P/B للقطاع</label>
+                            <input type="number" id="industry-pb" step="0.01" value="2.00" placeholder="2.00">
+                        </div>
+                        <button type="button" class="btn" id="update-multiples-btn">تحديث المقارنة</button>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-title">
+                        <span>التدفقات النقدية المخصومة (DCF)</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="dcf-chart"></canvas>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="discount-rate">معدل الخصم (%)</label>
+                            <input type="number" id="discount-rate" step="0.1" value="10.0" placeholder="10.0">
+                        </div>
+                        <div class="form-group">
+                            <label for="terminal-growth">معدل النمو النهائي (%)</label>
+                            <input type="number" id="terminal-growth" step="0.1" value="2.5" placeholder="2.5">
+                        </div>
+                        <button type="button" class="btn" id="calculate-dcf-btn">حساب القيمة العادلة</button>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-title">
+                        <span>نموذج جوردن للنمو</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="required-return">معدل العائد المطلوب (%)</label>
+                            <input type="number" id="required-return" step="0.1" value="9.5" placeholder="9.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="dividend-growth">معدل نمو توزيعات الأرباح (%)</label>
+                            <input type="number" id="dividend-growth" step="0.1" value="3.0" placeholder="3.0">
+                        </div>
+                        <button type="button" class="btn" id="calculate-gordon-btn">حساب القيمة العادلة</button>
+                    </div>
+                </div>
+                
+                <div class="result-card" id="valuation-summary" style="display: none;">
+                    <h3>ملخص التقييم</h3>
+                    <!-- This will be populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Technical Analysis Tab -->
+            <div class="evaluation-content" id="technical">
+                <h3>التحليل الفني للسهم</h3>
+                
+                <div class="chart-container">
+                    <canvas id="price-chart"></canvas>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="time-period">الفترة الزمنية</label>
+                        <select id="time-period">
+                            <option value="1m">شهر</option>
+                            <option value="3m">3 أشهر</option>
+                            <option value="6m" selected>6 أشهر</option>
+                            <option value="1y">سنة</option>
+                            <option value="2y">سنتين</option>
+                            <option value="5y">5 سنوات</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="indicator">المؤشر الفني</label>
+                        <select id="indicator">
+                            <option value="none">بدون مؤشرات</option>
+                            <option value="sma" selected>المتوسط المتحرك البسيط</option>
+                            <option value="ema">المتوسط المتحرك الأسي</option>
+                            <option value="bollinger">نطاقات بولينجر</option>
+                            <option value="macd">تباعد/تقارب المتوسط المتحرك (MACD)</option>
+                            <option value="rsi">مؤشر القوة النسبية (RSI)</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn" id="update-chart-btn">تحديث الرسم البياني</button>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-title">
+                        <span>نتائج التحليل الفني</span>
+                    </div>
+                    <div id="technical-results">
+                        <p>أدخل بيانات الشركة وحدد الفترة الزمنية والمؤشرات الفنية لعرض التحليل.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Comparison Tab -->
+            <div class="evaluation-content" id="comparison">
+                <h3>المقارنة بين الشركات</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="compare-sector">القطاع</label>
+                        <select id="compare-sector">
+                            <option value="technology" selected>التكنولوجيا</option>
+                            <option value="finance">المالية والبنوك</option>
+                            <option value="energy">الطاقة</option>
+                            <option value="healthcare">الرعاية الصحية</option>
+                            <option value="consumer">السلع الاستهلاكية</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="compare-metric">معيار المقارنة</label>
+                        <select id="compare-metric">
+                            <option value="pe" selected>مضاعف الربحية (P/E)</option>
+                            <option value="pb">مضاعف القيمة الدفترية (P/B)</option>
+                            <option value="ps">مضاعف المبيعات (P/S)</option>
+                            <option value="roe">العائد على حقوق المساهمين (ROE)</option>
+                            <option value="dividend">عائد توزيعات الأرباح</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn" id="load-comparison-btn">تحميل بيانات المقارنة</button>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="comparison-chart"></canvas>
+                </div>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>الشركة</th>
+                            <th>مضاعف الربحية (P/E)</th>
+                            <th>مضاعف القيمة الدفترية (P/B)</th>
+                            <th>مضاعف المبيعات (P/S)</th>
+                            <th>العائد على حقوق المساهمين</th>
+                            <th>عائد توزيعات الأرباح</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparison-table-body">
+                        <!-- This will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 EduInvest Pro. جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="../../JS/theme-switcher.js"></script>
+    <script src="../../JS/Markets/EvaluationOfCompanies.js"></script>
+</body>
+</html>
